@@ -9,5 +9,9 @@
 <body>
 	<%= "Nome recebido é: " + request.getParameter("nome")
 	%>
+	
+	<% response.sendRedirect("http://www.google.com"); %>
+	
+	
 </body>
 </html>
