@@ -17,8 +17,6 @@
 	<br/>
 	<input type="text" id="ano" name="ano">
 	<br/>
-	<input type="text" id="sexo" name="sexo">
-	<br/>
 	<input type="submit" value="testar">
 	</form>	
 </body>
