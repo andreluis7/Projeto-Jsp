@@ -13,9 +13,6 @@
 	<jsp:setProperty property="*" name="calcula"/>
 	<h3>Cabecalho</h3>
 	
-	Nome: ${param.nome}
-	<br/>
-	Ano: ${param.ano} 
-
+	${sessionScope.user}
 </body>
 </html>
