@@ -10,9 +10,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Index</h1>
+	
+	<form action="LoginServlet" method="post">
+	Login: 
+	<input type="text" id="login" name="login">
 	<br/>
-	<% session.setAttribute("user", "javaavancado"); %>
-	<a href="cabecalho.jsp">Ver teste.</a>
+	Senha:
+	<input type="text" id="senha" name="senha">
+	<br/>
+	
+	<input type="submit" value="Logar">
+	</form>
+	
+	
 </body>
 </html>
