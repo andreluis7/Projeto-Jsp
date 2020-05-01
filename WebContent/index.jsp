@@ -15,9 +15,11 @@
 	<input type="submit" value="Enviar">	
 	</form>
 	<br/>
-	<%@ page import="java.util.Date" %>
 	
-	<%= "Date de hoje: " + new Date() %>
+	<%@page errorPage="receber-nome.jsp" %>
+	
+	<%= 100/0 %>
+	
 	
 </body>
 </html>
