@@ -15,15 +15,7 @@
 	<input type="submit" value="Enviar">	
 	</form>
 	
-	<%! int cont= 2; 
+	<% session.setAttribute("curso", "curso de jsp"); %>
 	
-		public int retorna (int n){
-			return n*4;
-		}
-	%>
-	
-	<%= retorna(2) %>
-	
-	<%= application.getInitParameter("estado") %>
 </body>
 </html>

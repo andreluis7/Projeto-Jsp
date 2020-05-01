@@ -7,10 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%="Nome recebido é: " + request.getParameter("nome")%>
-
-	<%
-		response.sendRedirect("http://www.google.com");
-	%>
+	
+	<%= session.getAttribute("curso") %>
+	
 </body>
 </html>
