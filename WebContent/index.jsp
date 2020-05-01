@@ -1,3 +1,4 @@
+<jsp:useBean id="calcula" class="beans.BeanCursoJsp" type="beans.BeanCursoJsp" scope="page"/>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="myprefix" uri="WEB-INF/testetag.tld"%>
@@ -9,11 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<h1>Index</h1>
 
-	<jsp:include page="cabecalho.jsp" />
-	<h3>Corpo</h3>
-	<jsp:include page="rodape.jsp" />
+	<%= calcula.calcula(10) %>
+	
 </body>
 </html>
