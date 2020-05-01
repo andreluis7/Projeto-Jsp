@@ -14,8 +14,10 @@
 	<input type="text" id="nome" name="nome" >
 	<input type="submit" value="Enviar">	
 	</form>
+	<br/>
+	<%@ page import="java.util.Date" %>
 	
-	<% session.setAttribute("curso", "curso de jsp"); %>
+	<%= "Date de hoje: " + new Date() %>
 	
 </body>
 </html>
