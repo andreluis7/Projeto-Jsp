@@ -1,6 +1,8 @@
 <jsp:useBean id="calcula" class="beans.BeanCursoJsp" type="beans.BeanCursoJsp" scope="page"/>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="myprefix" uri="WEB-INF/testetag.tld"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,6 +12,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<c:set var="numero" value="${100/2}"/>
+	
+	<c:forEach var="n" begin="1" end="${numero}">
+	Item: ${n}
+	<br/>
+	</c:forEach>
 	
 	<form action="LoginServlet" method="post">
 	Login: 
