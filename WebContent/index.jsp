@@ -12,14 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<c:set var="numero" value="${100/2}"/>
-	
-	<c:forEach var="n" begin="1" end="${numero}">
-	Item: ${n}
-	<br/>
-	</c:forEach>
-	
 	<form action="LoginServlet" method="post">
 	Login: 
 	<input type="text" id="login" name="login">
@@ -30,7 +22,5 @@
 	
 	<input type="submit" value="Logar">
 	</form>
-	
-	
 </body>
 </html>
