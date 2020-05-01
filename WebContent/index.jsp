@@ -7,19 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Bem vindo ao curso de jsp!</h1>
-	<%= "seu sucesso garantido!" %>
-
-	<form action="receber-nome.jsp">
-	<input type="text" id="nome" name="nome" >
-	<input type="submit" value="Enviar">	
-	</form>
-	<br/>
 	
-	<%@page errorPage="receber-nome.jsp" %>
-	
-	<%= 100/0 %>
-	
+	<%@ include file="pagina-include.jsp" %>
 	
 </body>
 </html>

@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<%@page isErrorPage="true" %>
-	
-	<%= exception %>
+	<%@ include file="pagina-include.jsp"%>
+
 </body>
 </html>
