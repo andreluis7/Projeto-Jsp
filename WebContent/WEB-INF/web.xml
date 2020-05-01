@@ -7,4 +7,10 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<context-param>
+	<param-name>estado</param-name>
+	<param-value>Sao Paulo</param-value>
+	</context-param>
+	
 </web-app>

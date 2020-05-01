@@ -23,5 +23,7 @@
 	%>
 	
 	<%= retorna(2) %>
+	
+	<%= application.getInitParameter("estado") %>
 </body>
 </html>
