@@ -9,6 +9,7 @@
 <body>
 
 	<h2>Bem vindo ao sistema jsp ....</h2>
-
+	
+	<a href="cadastroUsuario.jsp">Cadastro de Usuários</a>
 </body>
 </html>
