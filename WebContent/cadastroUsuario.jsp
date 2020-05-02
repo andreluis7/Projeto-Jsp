@@ -26,13 +26,15 @@
 
 	<table>
 
-	<c:forEach items="${usuarios}" var="user">
-	<tr>
-	<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
-	<td><c:out value="${user.senha}"></c:out></td>
-	</tr>
-	</c:forEach>
-	
+		<c:forEach items="${usuarios}" var="user">
+			<tr>
+				<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
+				<td><c:out value="${user.senha}"></c:out></td>
+				
+				<td><a href="salvarUsuario?acao=delete&user=${user.login}">Excluir</a></td>
+			</tr>
+		</c:forEach>
+
 	</table>
 
 </body>
