@@ -51,8 +51,8 @@
 						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
 						<td><c:out value="${user.senha}"></c:out></td>
 
-						<td><a href="salvarUsuario?acao=delete&user=${user.login}">Excluir</a></td>
-						<td><a href="salvarUsuario?acao=editar&user=${user.login}">Editar</a></td>
+						<td><a href="salvarUsuario?acao=delete&user=${user.login}"><img src="resources/img/excluir.png" width="20px" height="20px" title="Excluir" alt="Excluir"></a></td>
+						<td><a href="salvarUsuario?acao=editar&user=${user.login}"><img src="resources/img/editar.png" width="20px" height="20px" title="Editar" alt="Editar"></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
