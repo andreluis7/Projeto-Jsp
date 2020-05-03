@@ -5,45 +5,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<link href="resources/css/cadastro.css" rel="stylesheet">
+<title>Cadastro de Usuário</title>
 </head>
 <body>
-	<h1>Cadastro de Usuários</h1>
-
-	<form action="salvarUsuario" method="post">
-		<table>
-			<tr>
-				<td>Codigo:</td>
-				<td><input type="text" readonly="readonly" id="id" name="id" value="${user.id}"></td>
-			</tr>
-			<tr>
-				<td>Login:</td>
-				<td><input type="text" id="login" name="login"
-					value="${user.login}"></td>
-			</tr>
-			<tr>
-				<td>Senha:</td>
-				<td><input type="password" id="senha" name="senha"
-					value="${user.senha}"></td>
-			</tr>
-		</table>
-		<input type="submit" value="Salvar">
+	<h2 class="center"> Cadastro de Usuario</h2>
+	<form action="salvarUsuario" method="post" id="formUser">
+		<ul class="form-style-1">
+			<li>
+				<table>
+					<tr>
+						<td>Codigo:</td>
+						<td><input type="text" readonly="readonly" id="id" name="id"
+							value="${user.id}"></td>
+					</tr>
+					<tr>
+						<td>Login:</td>
+						<td><input type="text" id="login" name="login"
+							value="${user.login}"></td>
+					</tr>
+					<tr>
+						<td>Senha:</td>
+						<td><input type="password" id="senha" name="senha"
+							value="${user.senha}"></td>
+					</tr>
+				</table> <input type="submit" value="Salvar">
+			</li>
+		</ul>
 	</form>
+	<div class="container">
+		<table class="responsive-table">
+			<caption>Usuarios Cadastrados</caption>
+			<tbody>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Login</th>
+					<th scope="col">Senha</th>
+					<th scope="col">Editar</th>
+					<th scope="col">Excluir</th>
+				</tr>
 
-	<table>
+				<c:forEach items="${usuarios}" var="user">
+					<tr>
+						<td style="widht: 150px"><c:out value="${user.id}"></c:out></td>
+						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
+						<td><c:out value="${user.senha}"></c:out></td>
 
-		<c:forEach items="${usuarios}" var="user">
-			<tr>
-				<td style="widht: 150px"><c:out value="${user.id}"></c:out></td>
-				<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
-				<td><c:out value="${user.senha}"></c:out></td>
-
-				<td><a href="salvarUsuario?acao=delete&user=${user.login}">Excluir</a></td>
-				<td><a href="salvarUsuario?acao=editar&user=${user.login}">Editar</a></td>
-			</tr>
-		</c:forEach>
-
-	</table>
-
+						<td><a href="salvarUsuario?acao=delete&user=${user.login}">Excluir</a></td>
+						<td><a href="salvarUsuario?acao=editar&user=${user.login}">Editar</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
