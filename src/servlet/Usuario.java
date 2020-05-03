@@ -54,12 +54,15 @@ public class Usuario extends HttpServlet {
 		String id = request.getParameter("id");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		String nome = request.getParameter("nome");
 		
 		BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
 		
 		beanCursoJsp.setId(!id.isEmpty()? Long.parseLong(id) : 0);
 		beanCursoJsp.setLogin(login);
 		beanCursoJsp.setSenha(senha);
+		beanCursoJsp.setNome(nome);
+		
 		if (id == null || id.isEmpty()) {
 			daoUsuario.salvar(beanCursoJsp);			
 		}else {

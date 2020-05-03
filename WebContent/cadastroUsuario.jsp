@@ -29,6 +29,11 @@
 						<td><input type="password" id="senha" name="senha"
 							value="${user.senha}"></td>
 					</tr>
+					<tr>
+						<td>Nome:</td>
+						<td><input type="text" id="nome" name="nome"
+							value="${user.nome}"></td>
+					</tr>
 				</table> <input type="submit" value="Salvar">
 			</li>
 		</ul>
@@ -40,7 +45,7 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Login</th>
-					<th scope="col">Senha</th>
+					<th scope="col">Nome</th>
 					<th scope="col">Editar</th>
 					<th scope="col">Excluir</th>
 				</tr>
@@ -49,10 +54,10 @@
 					<tr>
 						<td style="widht: 150px"><c:out value="${user.id}"></c:out></td>
 						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
-						<td><c:out value="${user.senha}"></c:out></td>
+						<td><c:out value="${user.nome}"></c:out></td>
 
-						<td><a href="salvarUsuario?acao=delete&user=${user.login}"><img src="resources/img/excluir.png" width="20px" height="20px" title="Excluir" alt="Excluir"></a></td>
 						<td><a href="salvarUsuario?acao=editar&user=${user.login}"><img src="resources/img/editar.png" width="20px" height="20px" title="Editar" alt="Editar"></a></td>
+						<td><a href="salvarUsuario?acao=delete&user=${user.login}"><img src="resources/img/excluir.png" width="20px" height="20px" title="Excluir" alt="Excluir"></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
