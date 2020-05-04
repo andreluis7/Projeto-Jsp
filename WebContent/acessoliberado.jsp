@@ -13,5 +13,8 @@
 	<a href="salvarUsuario?acao=listartodos"><img
 		src="resources/img/user.png" width="150px" height="150px"
 		title="Cadastro de usuários" alt="Cadastro de usuários"></a>
+	<a href="salvarProduto?acao=listarProdutos"><img
+		src="resources/img/produto.png" width="130px" height="130px"
+		title="Cadastro de produtos" alt="Cadastro de produtos"></a>
 </body>
 </html>
