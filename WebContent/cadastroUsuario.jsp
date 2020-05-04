@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h2 class="center">Cadastro de Usuario</h2>
+	<h3 class="center" style="color: orange"> ${msg}</h3>
 	<form action="salvarUsuario" method="post" id="formUser">
 		<ul class="form-style-1">
 			<li>

@@ -80,8 +80,9 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
 			try {
-
-			if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
+			if(id == null || id.isEmpty()  && !daoUsuario.validarLogin(login)){
+				request.setAttribute("msg", "Usuário já existe com o mesmo login");
+			}else if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(beanCursoJsp);
 			} else if (id != null && !id.isEmpty()) {
 				daoUsuario.atualizar(beanCursoJsp);
