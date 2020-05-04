@@ -36,6 +36,11 @@
 							value="${user.nome}"></td>
 					</tr>
 					<tr>
+						<td>Telefone:</td>
+						<td><input type="text" id="telefone" name="telefone"
+							value="${user.telefone}"></td>
+					</tr>
+					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar" style="margin-right: 5px"><input
 							type="submit" value="Cancelar"
@@ -53,6 +58,7 @@
 					<th scope="col">ID</th>
 					<th scope="col">Login</th>
 					<th scope="col">Nome</th>
+					<th scope="col">Telefone</th>
 					<th scope="col">Editar</th>
 					<th scope="col">Excluir</th>
 				</tr>
@@ -62,7 +68,8 @@
 						<td style="widht: 150px"><c:out value="${user.id}"></c:out></td>
 						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
 						<td><c:out value="${user.nome}"></c:out></td>
-
+						<td><c:out value="${user.telefone}"></c:out></td>
+						
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
 								src="resources/img/editar.png" width="20px" height="20px"
 								title="Editar" alt="Editar"></a></td>

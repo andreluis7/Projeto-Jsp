@@ -72,6 +72,7 @@ public class Usuario extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
+			String telefone = request.getParameter("telefone");
 
 			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
 
@@ -79,6 +80,7 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setLogin(login);
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
+			beanCursoJsp.setTelefone(telefone);
 			try {
 			if(id == null || id.isEmpty()  && !daoUsuario.validarLogin(login)){
 				request.setAttribute("msg", "Usuário já existe com o mesmo login");
