@@ -76,26 +76,47 @@ public class Usuario extends HttpServlet {
 
 			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
 
-			beanCursoJsp.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
+			beanCursoJsp.setId(!id.isEmpty() ? Long.parseLong(id) : null);
 			beanCursoJsp.setLogin(login);
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
 			beanCursoJsp.setTelefone(telefone);
+
+			boolean podeInserir = true;
+			String msg = null;
 			try {
 				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
-					request.setAttribute("msg", "Usuário já existe com o mesmo login");
-				} else if (id == null || id.isEmpty() && !daoUsuario.validarSenha(senha)) {
-					request.setAttribute("msg", "Usuário já existe com o mesma senha");
-				} else if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
+					msg = "\nUsuário já existe com o mesmo login";
+					podeInserir = false;
+				}
+
+				else if (id == null || id.isEmpty() && !daoUsuario.validarSenha(senha)) {
+					msg = "\nUsuário já existe com o mesma senha";
+					podeInserir = false;
+				}
+
+				if (msg != null) {
+					request.setAttribute("msg", msg);
+				}
+
+				if (id == null || id.isEmpty() && daoUsuario.validarLogin(login) && podeInserir) {
 					daoUsuario.salvar(beanCursoJsp);
-				} else if (id != null && !id.isEmpty()) {
+				}
+
+				else if (id != null && !id.isEmpty()) {
 					if (!daoUsuario.validarLoginUpdate(login, id)) {
 						request.setAttribute("msg", "Usuaário já existe com o mesmo login");
+						podeInserir = false;
 					} else if (!daoUsuario.validarSenhaUpdate(senha, id)) {
 						request.setAttribute("msg", "Usuaário já existe com o mesma senha");
+						podeInserir = false;
 					} else {
 						daoUsuario.atualizar(beanCursoJsp);
 					}
+				}
+
+				if (!podeInserir) {
+					request.setAttribute("user", beanCursoJsp);
 				}
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
