@@ -61,7 +61,7 @@ public class Produto extends HttpServlet {
 		if (acao != null && acao.equalsIgnoreCase("reset")) {
 			try {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
-				 request.setAttribute("produtos", daoProduto.listarProdutos());
+				request.setAttribute("produtos", daoProduto.listarProdutos());
 				dispatcher.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -72,18 +72,30 @@ public class Produto extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String valor = request.getParameter("valor");
+			boolean podeInserir = true;
+			String msg = null;
 
 			ProdutoBean produtoBean = new ProdutoBean();
 
+			if (quantidade == null || quantidade.isEmpty()) {
+				msg = "\nQuantidade é obrigatório";
+				podeInserir = false;
+			} else {
+				produtoBean.setQuantidade(Integer.parseInt(quantidade));	
+			}
+
 			produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
 			produtoBean.setNome(nome);
-			produtoBean.setQuantidade(Integer.parseInt(quantidade));
 			produtoBean.setValor(valor);
 
-			boolean podeInserir = true;
-			String msg = null;
 			try {
-				if (codigo == null || codigo.isEmpty() && !daoProduto.validarNome(nome)) {
+				if (nome == null || nome.isEmpty()) {
+					msg = "\nNome é obrigatório";
+					podeInserir = false;
+				} else if (valor == null || valor.isEmpty()) {
+					msg = "\nValor é obrigatório";
+					podeInserir = false;
+				} else if (codigo == null || codigo.isEmpty() && !daoProduto.validarNome(nome)) {
 					msg = "\nProduto já existe com o mesmo nome";
 					podeInserir = false;
 				}

@@ -85,7 +85,19 @@ public class Usuario extends HttpServlet {
 			boolean podeInserir = true;
 			String msg = null;
 			try {
-				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
+				if (login == null || login.isEmpty()) {
+					msg = "\nLogin é um campo obrigatório";
+					podeInserir = false;
+				} else if (nome == null || nome.isEmpty()) {
+					msg = "\nNome é um campo obrigatório";
+					podeInserir = false;
+				} else if (senha == null || senha.isEmpty()) {
+					msg = "\nSenha é um campo obrigatório";
+					podeInserir = false;
+				} else if (telefone == null || telefone.isEmpty()) {
+					msg = "\nTelefone é um campo obrigatório";
+					podeInserir = false;
+				} else if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
 					msg = "\nUsuário já existe com o mesmo login";
 					podeInserir = false;
 				}
