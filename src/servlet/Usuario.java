@@ -79,14 +79,14 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setLogin(login);
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
+			try {
 
-			if (id == null || id.isEmpty()) {
+			if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(beanCursoJsp);
-			} else {
+			} else if (id != null && !id.isEmpty()) {
 				daoUsuario.atualizar(beanCursoJsp);
 			}
 
-			try {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
 				dispatcher.forward(request, response);
