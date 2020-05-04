@@ -108,8 +108,35 @@ public class DaoUsuario {
 		return false;
 	}
 
+	public boolean validarSenha(String senha) throws Exception {
+		String sql = "select count(1) as qtd from usuario where senha = '" + senha + "'";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+
+		while (resultSet.next()) {
+			return resultSet.getInt("qtd") <=0;
+		}
+
+		return false;
+	}
+
+	
 	public boolean validarLoginUpdate(String login, String id) throws Exception {
 		String sql = "select count(1) as qtd from usuario where login = '" + login + "' and id <>" + id;
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+
+		while (resultSet.next()) {
+			return resultSet.getInt("qtd") <=0;
+		}
+
+		return false;
+	}
+	
+	public boolean validarSenhaUpdate(String senha, String id) throws Exception {
+		String sql = "select count(1) as qtd from usuario where senha = '" + senha + "' and id <>" + id;
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultSet = statement.executeQuery();

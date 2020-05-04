@@ -82,17 +82,21 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setNome(nome);
 			beanCursoJsp.setTelefone(telefone);
 			try {
-			if(id == null || id.isEmpty()  && !daoUsuario.validarLogin(login)){
-				request.setAttribute("msg", "Usuário já existe com o mesmo login");
-			}else if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
-				daoUsuario.salvar(beanCursoJsp);
-			} else if (id != null && !id.isEmpty()) {
-				if (!daoUsuario.validarLoginUpdate(login, id)) {
-					request.setAttribute("msg", "Usuaário já existe com o mesmo login");
-				}else {
-				daoUsuario.atualizar(beanCursoJsp);
+				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
+					request.setAttribute("msg", "Usuário já existe com o mesmo login");
+				} else if (id == null || id.isEmpty() && !daoUsuario.validarSenha(senha)) {
+					request.setAttribute("msg", "Usuário já existe com o mesma senha");
+				} else if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
+					daoUsuario.salvar(beanCursoJsp);
+				} else if (id != null && !id.isEmpty()) {
+					if (!daoUsuario.validarLoginUpdate(login, id)) {
+						request.setAttribute("msg", "Usuaário já existe com o mesmo login");
+					} else if (!daoUsuario.validarSenhaUpdate(senha, id)) {
+						request.setAttribute("msg", "Usuaário já existe com o mesma senha");
+					} else {
+						daoUsuario.atualizar(beanCursoJsp);
+					}
 				}
-			}
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
