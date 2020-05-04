@@ -87,7 +87,11 @@ public class Usuario extends HttpServlet {
 			}else if (id == null || id.isEmpty() && daoUsuario.validarLogin(login)) {
 				daoUsuario.salvar(beanCursoJsp);
 			} else if (id != null && !id.isEmpty()) {
+				if (!daoUsuario.validarLoginUpdate(login, id)) {
+					request.setAttribute("msg", "Usuaário já existe com o mesmo login");
+				}else {
 				daoUsuario.atualizar(beanCursoJsp);
+				}
 			}
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
