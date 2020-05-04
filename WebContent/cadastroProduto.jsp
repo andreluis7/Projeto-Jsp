@@ -10,15 +10,15 @@
 </head>
 <body>
 	<h2 class="center">Cadastro de Produtos</h2>
-	<h3 class="center" style="color: orange"> ${msg}</h3>
-	<form action="salvarProduto" method="post" id="formProduto">
+	<h3 class="center" style="color: orange">${msg}</h3>
+	<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos() ? true:false">
 		<ul class="form-style-1">
 			<li>
 				<table>
 					<tr>
 						<td>Codigo:</td>
-						<td><input type="text" readonly="readonly" id="codigo" name="codigo"
-							value="${produto.codigo}"></td>
+						<td><input type="text" readonly="readonly" id="codigo"
+							name="codigo" value="${produto.codigo}"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
@@ -37,8 +37,9 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar" style="margin-right: 5px"><input
-							type="submit" value="Cancelar"
+						<td><input type="submit" value="Salvar"
+							style="margin-right: 5px"><input type="submit"
+							value="Cancelar"
 							onclick="document.getElementById('formProduto').action = 'salvarProduto?acao=reset'"></td>
 					</tr>
 				</table>
@@ -64,11 +65,13 @@
 						<td style="widht: 150px"><c:out value="${produto.nome}"></c:out></td>
 						<td><c:out value="${produto.quantidade}"></c:out></td>
 						<td><c:out value="${produto.valor}"></c:out></td>
-						
-						<td><a href="salvarProduto?acao=editar&produto=${produto.codigo}"><img
+
+						<td><a
+							href="salvarProduto?acao=editar&produto=${produto.codigo}"><img
 								src="resources/img/editar.png" width="20px" height="20px"
 								title="Editar" alt="Editar"></a></td>
-						<td><a href="salvarProduto?acao=delete&produto=${produto.codigo}"><img
+						<td><a
+							href="salvarProduto?acao=delete&produto=${produto.codigo}"><img
 								src="resources/img/excluir.png" width="20px" height="20px"
 								title="Excluir" alt="Excluir"></a></td>
 					</tr>
@@ -76,5 +79,24 @@
 			</tbody>
 		</table>
 	</div>
+
+	<script type="text/javascript">
+		function validarCampos() {
+			if (document.getElementById("nome").value == '') {
+				alert('Informe o Nome');
+				return false;
+			} else if (document.getElementById("quantidade").value == '') {
+				alert('Informe a Quantidade');
+				return false;
+			} else if (document.getElementById("valor").value == '') {
+				alert('Informe o Valor');
+				return false;
+			}
+
+			return true;
+			
+		}
+	</script>
+
 </body>
 </html>
