@@ -73,6 +73,13 @@ public class Usuario extends HttpServlet {
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
 			String telefone = request.getParameter("telefone");
+			
+			String cep = request.getParameter("cep");
+			String rua = request.getParameter("rua");
+			String bairro = request.getParameter("bairro");
+			String cidade = request.getParameter("cidade");
+			String estado = request.getParameter("estado");
+			String ibge = request.getParameter("ibge");
 
 			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
 
@@ -81,6 +88,13 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
 			beanCursoJsp.setTelefone(telefone);
+			
+			beanCursoJsp.setCep(cep);
+			beanCursoJsp.setRua(rua);
+			beanCursoJsp.setBairro(bairro);
+			beanCursoJsp.setCidade(cidade);
+			beanCursoJsp.setEstado(estado);
+			beanCursoJsp.setIbge(ibge);
 
 			boolean podeInserir = true;
 			String msg = null;
@@ -117,10 +131,10 @@ public class Usuario extends HttpServlet {
 
 				else if (id != null && !id.isEmpty()) {
 					if (!daoUsuario.validarLoginUpdate(login, id)) {
-						request.setAttribute("msg", "Usuaário já existe com o mesmo login");
+						request.setAttribute("msg", "Usuário já existe com o mesmo login");
 						podeInserir = false;
 					} else if (!daoUsuario.validarSenhaUpdate(senha, id)) {
-						request.setAttribute("msg", "Usuaário já existe com o mesma senha");
+						request.setAttribute("msg", "Usuário já existe com o mesma senha");
 						podeInserir = false;
 					} else {
 						daoUsuario.atualizar(beanCursoJsp);
@@ -133,6 +147,7 @@ public class Usuario extends HttpServlet {
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
+				request.setAttribute("msg", "Salvo com sucesso!");
 				dispatcher.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -33,8 +33,7 @@
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
 							value="${user.login}"></td>
-					</tr>
-					<tr>
+
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
 							value="${user.senha}"></td>
@@ -43,35 +42,37 @@
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
 							value="${user.nome}"></td>
-					</tr>
-					<tr>
+
 						<td>Telefone:</td>
 						<td><input type="text" id="telefone" name="telefone"
 							value="${user.telefone}"></td>
 					</tr>
 					<tr>
 						<td>Cep:</td>
-						<td><input type="text" id="cep" name="cep"></td>
+						<td><input type="text" id="cep" name="cep"
+							value="${user.cep}"></td>
+
+						<td>Ibge:</td>
+						<td><input type="text" id="ibge" name="ibge"
+							value="${user.ibge}"></td>
 					</tr>
 					<tr>
 						<td>Rua:</td>
-						<td><input type="text" id="rua" name="rua"></td>
-					</tr>
-					<tr>
+						<td><input type="text" id="rua" name="rua"
+							value="${user.rua}"></td>
+
 						<td>Bairro:</td>
-						<td><input type="text" id="bairro" name="bairro"></td>
+						<td><input type="text" id="bairro" name="bairro"
+							value="${user.bairro}"></td>
 					</tr>
 					<tr>
 						<td>Cidade:</td>
-						<td><input type="text" id="cidade" name="cidade"></td>
-					</tr>
-					<tr>
+						<td><input type="text" id="cidade" name="cidade"
+							value="${user.cidade}"></td>
+
 						<td>Estado:</td>
-						<td><input type="text" id="estado" name="estado"></td>
-					</tr>
-					<tr>
-						<td>Ibge:</td>
-						<td><input type="text" id="ibge" name="ibge"></td>
+						<td><input type="text" id="estado" name="estado"
+							value="${user.estado}"></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -93,16 +94,28 @@
 					<th scope="col">Login</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Telefone</th>
+					<th scope="col">Cep</th>
+					<th scope="col">Rua</th>
+					<th scope="col">Bairro</th>
+					<th scope="col">Cidade</th>
+					<th scope="col">Estado</th>
+					<th scope="col">Ibge</th>
 					<th scope="col">Editar</th>
 					<th scope="col">Excluir</th>
 				</tr>
 
 				<c:forEach items="${usuarios}" var="user">
 					<tr>
-						<td style="widht: 150px"><c:out value="${user.id}"></c:out></td>
-						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
+						<td><c:out value="${user.id}"></c:out></td>
+						<td><c:out value="${user.login}"></c:out></td>
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.telefone}"></c:out></td>
+						<td><c:out value="${user.cep}"></c:out></td>
+						<td><c:out value="${user.rua}"></c:out></td>
+						<td><c:out value="${user.bairro}"></c:out></td>
+						<td><c:out value="${user.cidade}"></c:out></td>
+						<td><c:out value="${user.estado}"></c:out></td>
+						<td><c:out value="${user.ibge}"></c:out></td>
 
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
 								src="resources/img/editar.png" width="20px" height="20px"
