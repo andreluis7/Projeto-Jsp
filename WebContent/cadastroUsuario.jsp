@@ -6,14 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="resources/css/cadastro.css" rel="stylesheet">
+
+<!-- Adicionando JQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+
 <title>Cadastro de Usuário</title>
 </head>
 <body>
-<a href="acessoliberado.jsp">Início</a>
-<a href="index.jsp">Sair</a>
+	<a href="acessoliberado.jsp">Início</a>
+	<a href="index.jsp">Sair</a>
 	<h2 class="center">Cadastro de Usuario</h2>
-	<h3 class="center" style="color: orange"> ${msg}</h3>
-	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true:false">
+	<h3 class="center" style="color: orange">${msg}</h3>
+	<form action="salvarUsuario" method="post" id="formUser"
+		onsubmit="return validarCampos() ? true:false">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -43,9 +50,34 @@
 							value="${user.telefone}"></td>
 					</tr>
 					<tr>
+						<td>Cep:</td>
+						<td><input type="text" id="cep" name="cep"></td>
+					</tr>
+					<tr>
+						<td>Rua:</td>
+						<td><input type="text" id="rua" name="rua"></td>
+					</tr>
+					<tr>
+						<td>Bairro:</td>
+						<td><input type="text" id="bairro" name="bairro"></td>
+					</tr>
+					<tr>
+						<td>Cidade:</td>
+						<td><input type="text" id="cidade" name="cidade"></td>
+					</tr>
+					<tr>
+						<td>Estado:</td>
+						<td><input type="text" id="estado" name="estado"></td>
+					</tr>
+					<tr>
+						<td>Ibge:</td>
+						<td><input type="text" id="ibge" name="ibge"></td>
+					</tr>
+					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar" style="margin-right: 5px"><input
-							type="submit" value="Cancelar"
+						<td><input type="submit" value="Salvar"
+							style="margin-right: 5px"><input type="submit"
+							value="Cancelar"
 							onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>
 					</tr>
 				</table>
@@ -71,7 +103,7 @@
 						<td style="widht: 150px"><c:out value="${user.login}"></c:out></td>
 						<td><c:out value="${user.nome}"></c:out></td>
 						<td><c:out value="${user.telefone}"></c:out></td>
-						
+
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
 								src="resources/img/editar.png" width="20px" height="20px"
 								title="Editar" alt="Editar"></a></td>
@@ -83,28 +115,94 @@
 			</tbody>
 		</table>
 	</div>
-	
+
 	<script type="text/javascript">
-	
-	function validarCampos() {
-		if(document.getElementById("login").value == ''){
-			alert('Informe o Login');
-			return false;
-		} else if(document.getElementById("nome").value == ''){
-			alert('Informe o Nome');
-			return false;
-		} else if(document.getElementById("senha").value == ''){
-			alert('Informe a Senha');
-			return false;
-		}
-		else if(document.getElementById("telefone").value == ''){
-			alert('Informe o Telefone');
-			return false;
+		function validarCampos() {
+			if (document.getElementById("login").value == '') {
+				alert('Informe o Login');
+				return false;
+			} else if (document.getElementById("nome").value == '') {
+				alert('Informe o Nome');
+				return false;
+			} else if (document.getElementById("senha").value == '') {
+				alert('Informe a Senha');
+				return false;
+			} else if (document.getElementById("telefone").value == '') {
+				alert('Informe o Telefone');
+				return false;
+			}
+
+			return true;
 		}
 		
-		return true;
-	}
-	
-	</script>
+		<!-- Adicionando Javascript Cep-->
+			$(document).ready(
+					function() {
+
+						function limpa_formulário_cep() {
+							// Limpa valores do formulário de cep.
+							$("#rua").val("");
+							$("#bairro").val("");
+							$("#cidade").val("");
+							$("#estado").val("");
+							$("#ibge").val("");
+						}
+
+						//Quando o campo cep perde o foco.
+						$("#cep").blur(
+								function() {
+
+									//Nova variável "cep" somente com dígitos.
+									var cep = $(this).val().replace(/\D/g, '');
+
+									//Verifica se campo cep possui valor informado.
+									if (cep != "") {
+
+										//Expressão regular para validar o CEP.
+										var validacep = /^[0-9]{8}$/;
+
+										//Valida o formato do CEP.
+										if (validacep.test(cep)) {
+
+											//Preenche os campos com "..." enquanto consulta webservice.
+											$("#rua").val("...");
+											$("#bairro").val("...");
+											$("#cidade").val("...");
+											$("#estado").val("...");
+											$("#ibge").val("...");
+
+											//Consulta o webservice viacep.com.br/
+											$.getJSON("https://viacep.com.br/ws/" + cep
+													+ "/json/?callback=?", function(
+													dados) {
+
+												if (!("erro" in dados)) {
+													//Atualiza os campos com os valores da consulta.
+													$("#rua").val(dados.logradouro);
+													$("#bairro").val(dados.bairro);
+													$("#cidade").val(dados.localidade);
+													$("#estado").val(dados.uf);
+													$("#ibge").val(dados.ibge);
+												} //end if.
+												else {
+													//CEP pesquisado não foi encontrado.
+													limpa_formulário_cep();
+													alert("CEP não encontrado.");
+												}
+											});
+										} //end if.
+										else {
+											//cep é inválido.
+											limpa_formulário_cep();
+											alert("Formato de CEP inválido.");
+										}
+									} //end if.
+									else {
+										//cep sem valor, limpa formulário.
+										limpa_formulário_cep();
+									}
+								});
+					});
+		</script>
 </body>
 </html>
