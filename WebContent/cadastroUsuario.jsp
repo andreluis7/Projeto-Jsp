@@ -9,6 +9,8 @@
 <title>Cadastro de Usuário</title>
 </head>
 <body>
+<a href="acessoliberado.jsp">Início</a>
+<a href="index.jsp">Sair</a>
 	<h2 class="center">Cadastro de Usuario</h2>
 	<h3 class="center" style="color: orange"> ${msg}</h3>
 	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true:false">
