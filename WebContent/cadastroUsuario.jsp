@@ -32,25 +32,25 @@
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}"></td>
+							value="${user.login}" placeholder = "Informe o login"></td>
 
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}"></td>
+							value="${user.senha}" placeholder = "Informe a senha"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}"></td>
+							value="${user.nome}" placeholder = "Informe o nome" ></td>
 
 						<td>Telefone:</td>
 						<td><input type="text" id="telefone" name="telefone"
-							value="${user.telefone}"></td>
+							value="${user.telefone}" placeholder = "Informe o telefone"></td>
 					</tr>
 					<tr>
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}"></td>
+							value="${user.cep}" placeholder = "Informe o cep"></td>
 
 						<td>Ibge:</td>
 						<td><input type="text" id="ibge" name="ibge"

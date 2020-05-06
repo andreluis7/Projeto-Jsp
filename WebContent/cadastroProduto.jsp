@@ -25,17 +25,17 @@
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${produto.nome}"></td>
+							value="${produto.nome}" placeholder = "Informe o nome do produto"></td>
 					</tr>
 					<tr>
 						<td>Quantidade:</td>
 						<td><input type="text" id="quantidade" name="quantidade"
-							value="${produto.quantidade}"></td>
+							value="${produto.quantidade}" placeholder = "Informe a quantidade" ></td>
 					</tr>
 					<tr>
 						<td>Valor:</td>
 						<td><input type="text" id="valor" name="valor"
-							value="${produto.valor}"></td>
+							value="${produto.valor}" placeholder = "Informe o valor do produto" ></td>
 					</tr>
 					<tr>
 						<td></td>

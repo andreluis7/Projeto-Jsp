@@ -30,7 +30,7 @@
 					<tr>
 						<td>Número:</td>
 						<td><input type="text" id="numero" name="numero"
-							value="${telefone.numero}"></td>
+							value="${telefone.numero}" placeholder = "Informe o número do telefone"></td>
 
 						<td><select id="tipo" name="tipo" style="width: 100%">
 								<option>Casa</option>

@@ -17,8 +17,8 @@
 	<div class="login-page">
 		<div class="form">
 			<form action="LoginServlet" method="post">
-				Login: <input type="text" id="login" name="login"> <br />
-				Senha: <input type="password" id="senha" name="senha"> <br />
+				Login: <input type="text" id="login" name="login" placeholder = "Informe o login"> <br />
+				Senha: <input type="password" id="senha" name="senha" placeholder = "Informe a senha"> <br />
 
 				<button type="submit" value="Logar">Logar</button>
 			</form>
