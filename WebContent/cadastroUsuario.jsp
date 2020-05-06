@@ -100,6 +100,7 @@
 					<th scope="col">Cidade</th>
 					<th scope="col">Estado</th>
 					<th scope="col">Ibge</th>
+					<th scope="col">Telefone</th>
 					<th scope="col">Editar</th>
 					<th scope="col">Excluir</th>
 				</tr>
@@ -117,6 +118,9 @@
 						<td><c:out value="${user.estado}"></c:out></td>
 						<td><c:out value="${user.ibge}"></c:out></td>
 
+						<td><a href="salvarTelefone?user=${user.id}"><img
+								src="resources/img/telefone.png" width="20px" height="20px"
+								title="Telefones" alt="Telefones"></a></td>
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
 								src="resources/img/editar.png" width="20px" height="20px"
 								title="Editar" alt="Editar"></a></td>
