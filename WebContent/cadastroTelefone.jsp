@@ -54,6 +54,7 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Número</th>
+					<th scope="col">Tipo</th>
 					<th scope="col">Excluir</th>
 				</tr>
 
@@ -63,7 +64,7 @@
 						<td><c:out value="${telefone.numero}"></c:out></td>
 						<td><c:out value="${telefone.tipo}"></c:out></td>
 
-						<td><a href="salvarTelefone?acao=delete&user=${telefone.id}"><img
+						<td><a href="salvarTelefone?acao=deleteFone&telefoneId=${telefone.id}"><img
 								src="resources/img/excluir.png" width="20px" height="20px"
 								title="Excluir" alt="Excluir"></a></td>
 					</tr>

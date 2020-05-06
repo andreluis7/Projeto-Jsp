@@ -118,7 +118,7 @@
 						<td><c:out value="${user.estado}"></c:out></td>
 						<td><c:out value="${user.ibge}"></c:out></td>
 
-						<td><a href="salvarTelefone?user=${user.id}"><img
+						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
 								src="resources/img/telefone.png" width="20px" height="20px"
 								title="Telefones" alt="Telefones"></a></td>
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
