@@ -20,7 +20,7 @@
 	<h2 class="center">Cadastro de Usuario</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
 	<form action="salvarUsuario" method="post" id="formUser"
-		onsubmit="return validarCampos() ? true:false">
+		onsubmit="return validarCampos() ? true:false;" enctype="multipart/form-data">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -32,25 +32,25 @@
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" placeholder = "Informe o login"></td>
+							value="${user.login}" placeholder="Informe o login"></td>
 
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}" placeholder = "Informe a senha"></td>
+							value="${user.senha}" placeholder="Informe a senha"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" placeholder = "Informe o nome" ></td>
+							value="${user.nome}" placeholder="Informe o nome"></td>
 
 						<td>Telefone:</td>
 						<td><input type="text" id="telefone" name="telefone"
-							value="${user.telefone}" placeholder = "Informe o telefone"></td>
+							value="${user.telefone}" placeholder="Informe o telefone"></td>
 					</tr>
 					<tr>
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}" placeholder = "Informe o cep"></td>
+							value="${user.cep}" placeholder="Informe o cep"></td>
 
 						<td>Ibge:</td>
 						<td><input type="text" id="ibge" name="ibge"
@@ -74,6 +74,15 @@
 						<td><input type="text" id="estado" name="estado"
 							value="${user.estado}"></td>
 					</tr>
+
+					<tr>
+						<td>Foto
+						</td>
+						<td>
+						<input type="file" name="foto" value="Foto">
+						</td>
+					</tr>
+
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"
@@ -92,14 +101,8 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Login</th>
+					<th scope="col">Foto</th>
 					<th scope="col">Nome</th>
-					<th scope="col">Telefone</th>
-					<th scope="col">Cep</th>
-					<th scope="col">Rua</th>
-					<th scope="col">Bairro</th>
-					<th scope="col">Cidade</th>
-					<th scope="col">Estado</th>
-					<th scope="col">Ibge</th>
 					<th scope="col">Telefone</th>
 					<th scope="col">Editar</th>
 					<th scope="col">Excluir</th>
@@ -109,15 +112,10 @@
 					<tr>
 						<td><c:out value="${user.id}"></c:out></td>
 						<td><c:out value="${user.login}"></c:out></td>
+						<td><img src='<c:out value="${user.tempFotoUser}"/>' 
+							width="20px" height="20px" alt="Imagem" title="Imagem"></td>
 						<td><c:out value="${user.nome}"></c:out></td>
-						<td><c:out value="${user.telefone}"></c:out></td>
-						<td><c:out value="${user.cep}"></c:out></td>
-						<td><c:out value="${user.rua}"></c:out></td>
-						<td><c:out value="${user.bairro}"></c:out></td>
-						<td><c:out value="${user.cidade}"></c:out></td>
-						<td><c:out value="${user.estado}"></c:out></td>
-						<td><c:out value="${user.ibge}"></c:out></td>
-
+						
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
 								src="resources/img/telefone.png" width="20px" height="20px"
 								title="Telefones" alt="Telefones"></a></td>

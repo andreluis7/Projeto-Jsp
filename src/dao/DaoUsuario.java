@@ -21,7 +21,7 @@ public class DaoUsuario {
 	public void salvar(BeanCursoJsp beanCursoJsp) {
 		try {
 			String sql = "insert into usuario (login, senha, nome, telefone, "
-					+ "cep, rua, bairro, cidade, estado, ibge) " + "values (?,?,?,?,?,?,?,?,?,?)";
+					+ "cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype) " + "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
 
 			statement.setString(1, beanCursoJsp.getLogin());
@@ -34,6 +34,8 @@ public class DaoUsuario {
 			statement.setString(8, beanCursoJsp.getCidade());
 			statement.setString(9, beanCursoJsp.getEstado());
 			statement.setString(10, beanCursoJsp.getIbge());
+			statement.setString(11, beanCursoJsp.getFotoBase64());
+			statement.setString(12, beanCursoJsp.getContentType());
 			statement.execute();
 			connection.commit();
 
@@ -68,6 +70,8 @@ public class DaoUsuario {
 			beanCursoJsp.setCidade(resultSet.getString("cidade"));
 			beanCursoJsp.setEstado(resultSet.getString("estado"));
 			beanCursoJsp.setIbge(resultSet.getString("ibge"));
+			beanCursoJsp.setFotoBase64(resultSet.getString("fotobase64"));
+			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			usuarios.add(beanCursoJsp);
 		}
 		return usuarios;
@@ -169,7 +173,7 @@ public class DaoUsuario {
 	public void atualizar(BeanCursoJsp beanCursoJsp) {
 		try {
 			String sql = "update usuario set login = ?, senha = ?, nome = ?, telefone = ? , "
-					+ "cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ? " + "where id = "
+					+ "cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?, contenttype = ? " + "where id = "
 					+ beanCursoJsp.getId();
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, beanCursoJsp.getLogin());
@@ -182,6 +186,8 @@ public class DaoUsuario {
 			preparedStatement.setString(8, beanCursoJsp.getCidade());
 			preparedStatement.setString(9, beanCursoJsp.getEstado());
 			preparedStatement.setString(10, beanCursoJsp.getIbge());
+			preparedStatement.setString(11, beanCursoJsp.getFotoBase64());
+			preparedStatement.setString(12, beanCursoJsp.getContentType());
 			preparedStatement.executeUpdate();
 			connection.commit();
 		} catch (Exception e) {

@@ -1,18 +1,33 @@
 package servlet;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.buf.UDecoder;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import beans.BeanCursoJsp;
 import dao.DaoUsuario;
+import sun.font.FontResolver;
 
 @WebServlet("/salvarUsuario")
+@MultipartConfig
 public class Usuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -73,7 +88,7 @@ public class Usuario extends HttpServlet {
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
 			String telefone = request.getParameter("telefone");
-			
+
 			String cep = request.getParameter("cep");
 			String rua = request.getParameter("rua");
 			String bairro = request.getParameter("bairro");
@@ -88,7 +103,7 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setSenha(senha);
 			beanCursoJsp.setNome(nome);
 			beanCursoJsp.setTelefone(telefone);
-			
+
 			beanCursoJsp.setCep(cep);
 			beanCursoJsp.setRua(rua);
 			beanCursoJsp.setBairro(bairro);
@@ -96,9 +111,24 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setEstado(estado);
 			beanCursoJsp.setIbge(ibge);
 
-			boolean podeInserir = true;
-			String msg = null;
+			// Inicio File Upload de imagens e pdf
 			try {
+
+				if (ServletFileUpload.isMultipartContent(request)) {
+					Part imagemFoto = request.getPart("foto");
+
+					String fotoBase64 = new Base64()
+							.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
+					
+					beanCursoJsp.setFotoBase64(fotoBase64);
+					beanCursoJsp.setContentType(imagemFoto.getContentType());
+				}
+
+				// Fim File Upload
+
+				boolean podeInserir = true;
+				String msg = null;
+
 				if (login == null || login.isEmpty()) {
 					msg = "\nLogin é um campo obrigatório";
 					podeInserir = false;
@@ -153,6 +183,20 @@ public class Usuario extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/* Converte a entrada de fluxo de dados da imagem para byte[] */
+	private byte[] converteStremParabyte(InputStream imagem) throws Exception {
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int reads = imagem.read();
+		while (reads != -1) {
+			baos.write(reads);
+			reads = imagem.read();
+		}
+
+		return baos.toByteArray();
+
 	}
 
 }
