@@ -20,7 +20,8 @@
 	<h2 class="center">Cadastro de Usuario</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
 	<form action="salvarUsuario" method="post" id="formUser"
-		onsubmit="return validarCampos() ? true:false;" enctype="multipart/form-data">
+		onsubmit="return validarCampos() ? true:false;"
+		enctype="multipart/form-data">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -76,11 +77,8 @@
 					</tr>
 
 					<tr>
-						<td>Foto
-						</td>
-						<td>
-						<input type="file" name="foto" value="Foto">
-						</td>
+						<td>Foto</td>
+						<td><input type="file" name="foto" value="Foto"></td>
 					</tr>
 
 					<tr>
@@ -112,10 +110,11 @@
 					<tr>
 						<td><c:out value="${user.id}"></c:out></td>
 						<td><c:out value="${user.login}"></c:out></td>
-						<td><img src='<c:out value="${user.tempFotoUser}"/>' 
-							width="20px" height="20px" alt="Imagem" title="Imagem"></td>
+						<td><a href="salvarUsuario?acao=download&user=${user.id}"><img
+								src='<c:out value="${user.tempFotoUser}"/>' alt="Imagem User"
+								title="Imagem User" width="32px" height="32px" /> </a></td>
 						<td><c:out value="${user.nome}"></c:out></td>
-						
+
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
 								src="resources/img/telefone.png" width="20px" height="20px"
 								title="Telefones" alt="Telefones"></a></td>

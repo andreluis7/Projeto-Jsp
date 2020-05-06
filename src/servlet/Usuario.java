@@ -39,7 +39,6 @@ public class Usuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		try {
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
@@ -62,6 +61,31 @@ public class Usuario extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
 				dispatcher.forward(request, response);
+			} else if (acao.equalsIgnoreCase("download")) {
+				BeanCursoJsp usuario = daoUsuario.consultar(user);
+				if (usuario != null) {
+					response.setHeader("Content-Disposition",
+							"attachment;filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+
+					/* Converte a base64 da imagem do banco para byte[] */
+					byte[] imageFotoBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+
+					/* Coloca os bytes em um objeto de entrada para processar */
+					InputStream is = new ByteArrayInputStream(imageFotoBytes);
+
+					/* inicio da resposta para o navegador */
+					int read = 0;
+					byte[] bytes = new byte[1024];
+					OutputStream os = response.getOutputStream();
+
+					while ((read = is.read(bytes)) != -1) {
+						os.write(bytes, 0, read);
+					}
+
+					os.flush();
+					os.close();
+
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +143,7 @@ public class Usuario extends HttpServlet {
 
 					String fotoBase64 = new Base64()
 							.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
-					
+
 					beanCursoJsp.setFotoBase64(fotoBase64);
 					beanCursoJsp.setContentType(imagemFoto.getContentType());
 				}
