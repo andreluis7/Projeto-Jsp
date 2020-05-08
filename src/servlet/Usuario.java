@@ -64,14 +64,23 @@ public class Usuario extends HttpServlet {
 			} else if (acao.equalsIgnoreCase("download")) {
 				BeanCursoJsp usuario = daoUsuario.consultar(user);
 				if (usuario != null) {
-					response.setHeader("Content-Disposition",
-							"attachment;filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+					String contentType = "";
+					byte[] fileBytes = null;
+					String tipo = request.getParameter("tipo");
 
-					/* Converte a base64 da imagem do banco para byte[] */
-					byte[] imageFotoBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					if(tipo.equalsIgnoreCase("imagem")) {
+						contentType = usuario.getContentType();
+						fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+					} else if(tipo.equalsIgnoreCase("curriculo")) {
+						contentType = usuario.getContentTypeCurriculo();
+						fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
+					}
+					
+					response.setHeader("Content-Disposition",
+							"attachment;filename=arquivo." + contentType.split("\\/")[1]);
 
 					/* Coloca os bytes em um objeto de entrada para processar */
-					InputStream is = new ByteArrayInputStream(imageFotoBytes);
+					InputStream is = new ByteArrayInputStream(fileBytes);
 
 					/* inicio da resposta para o navegador */
 					int read = 0;
@@ -141,11 +150,24 @@ public class Usuario extends HttpServlet {
 				if (ServletFileUpload.isMultipartContent(request)) {
 					Part imagemFoto = request.getPart("foto");
 
-					String fotoBase64 = new Base64()
-							.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
+					if (imagemFoto != null) {
+						String fotoBase64 = new Base64()
+								.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
 
-					beanCursoJsp.setFotoBase64(fotoBase64);
-					beanCursoJsp.setContentType(imagemFoto.getContentType());
+						beanCursoJsp.setFotoBase64(fotoBase64);
+						beanCursoJsp.setContentType(imagemFoto.getContentType());
+					}
+
+					// Processa PDF
+					Part curriculoPdf = request.getPart("curriculo");
+
+					if (curriculoPdf != null) {
+						String curriculoBase64 = new Base64()
+								.encodeBase64String(converteStremParabyte(curriculoPdf.getInputStream()));
+
+						beanCursoJsp.setCurriculoBase64(curriculoBase64);
+						beanCursoJsp.setContentTypeCurriculo(curriculoPdf.getContentType());
+					}
 				}
 
 				// Fim File Upload

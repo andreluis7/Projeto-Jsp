@@ -82,6 +82,11 @@
 					</tr>
 
 					<tr>
+						<td>Currículo</td>
+						<td><input type="file" name="curriculo" value="curriculo"></td>
+					</tr>
+
+					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"
 							style="margin-right: 5px"><input type="submit"
@@ -100,6 +105,7 @@
 					<th scope="col">ID</th>
 					<th scope="col">Login</th>
 					<th scope="col">Foto</th>
+					<th scope="col">Currículo</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Telefone</th>
 					<th scope="col">Editar</th>
@@ -110,9 +116,11 @@
 					<tr>
 						<td><c:out value="${user.id}"></c:out></td>
 						<td><c:out value="${user.login}"></c:out></td>
-						<td><a href="salvarUsuario?acao=download&user=${user.id}"><img
+						<td><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
 								src='<c:out value="${user.tempFotoUser}"/>' alt="Imagem User"
 								title="Imagem User" width="32px" height="32px" /> </a></td>
+						<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">
+						Currículo</a></td>
 						<td><c:out value="${user.nome}"></c:out></td>
 
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
