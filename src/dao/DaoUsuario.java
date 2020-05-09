@@ -183,7 +183,8 @@ public class DaoUsuario {
 	public void atualizar(BeanCursoJsp beanCursoJsp) {
 		try {
 			String sql = "update usuario set login = ?, senha = ?, nome = ?, telefone = ? , "
-					+ "cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?, contenttype = ? "
+					+ "cep = ?, rua = ?, bairro = ?, cidade = ?, estado = ?, ibge = ?, fotobase64 = ?, "
+					+ "contenttype = ?, curriculoBase64 = ?, contentTypeCurriculo = ? "
 					+ "where id = " + beanCursoJsp.getId();
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, beanCursoJsp.getLogin());

@@ -68,14 +68,14 @@ public class Usuario extends HttpServlet {
 					byte[] fileBytes = null;
 					String tipo = request.getParameter("tipo");
 
-					if(tipo.equalsIgnoreCase("imagem")) {
+					if (tipo.equalsIgnoreCase("imagem")) {
 						contentType = usuario.getContentType();
 						fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
-					} else if(tipo.equalsIgnoreCase("curriculo")) {
+					} else if (tipo.equalsIgnoreCase("curriculo")) {
 						contentType = usuario.getContentTypeCurriculo();
 						fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
 					}
-					
+
 					response.setHeader("Content-Disposition",
 							"attachment;filename=arquivo." + contentType.split("\\/")[1]);
 
@@ -150,23 +150,29 @@ public class Usuario extends HttpServlet {
 				if (ServletFileUpload.isMultipartContent(request)) {
 					Part imagemFoto = request.getPart("foto");
 
-					if (imagemFoto != null) {
+					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
 						String fotoBase64 = new Base64()
 								.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
 
 						beanCursoJsp.setFotoBase64(fotoBase64);
 						beanCursoJsp.setContentType(imagemFoto.getContentType());
+					}else {
+						beanCursoJsp.setFotoBase64(request.getParameter("fotoTemp"));
+						beanCursoJsp.setContentType(request.getParameter("contentTypeTemp"));
 					}
 
 					// Processa PDF
 					Part curriculoPdf = request.getPart("curriculo");
 
-					if (curriculoPdf != null) {
+					if (curriculoPdf != null && curriculoPdf.getInputStream().available() > 0) {
 						String curriculoBase64 = new Base64()
 								.encodeBase64String(converteStremParabyte(curriculoPdf.getInputStream()));
 
 						beanCursoJsp.setCurriculoBase64(curriculoBase64);
 						beanCursoJsp.setContentTypeCurriculo(curriculoPdf.getContentType());
+					}else {
+						beanCursoJsp.setCurriculoBase64(request.getParameter("curriculoTemp"));
+						beanCursoJsp.setContentTypeCurriculo(request.getParameter("curriculoContentTypeTemp"));
 					}
 				}
 
