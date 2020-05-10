@@ -41,7 +41,7 @@ public class DaoTelefone {
 
 	}
 
-	public List<TelefoneBean> listarProdutos(Long user) throws Exception {
+	public List<TelefoneBean> listarTelefones(Long user) throws Exception {
 		List<TelefoneBean> telefones = new ArrayList<TelefoneBean>();
 		String sql = "select * from telefone where usuario = " + user;
 		PreparedStatement statement = connection.prepareStatement(sql);

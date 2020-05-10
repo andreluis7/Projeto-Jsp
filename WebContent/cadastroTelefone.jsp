@@ -30,7 +30,8 @@
 					<tr>
 						<td>Número:</td>
 						<td><input type="text" id="numero" name="numero"
-							value="${telefone.numero}" placeholder = "Informe o número do telefone"></td>
+							value="${telefone.numero}"
+							placeholder="Informe o número do telefone"></td>
 
 						<td><select id="tipo" name="tipo" style="width: 100%">
 								<option>Casa</option>
@@ -40,8 +41,13 @@
 
 					</tr>
 					<tr>
-						<td><input type="submit" value="Salvar"
-							style="margin-right: 5px"></td>
+						<td></td>
+						<td><input type="submit" value="Salvar" style="width: 173px;" />
+
+						</td>
+						<td><input type="submit" value="Voltar" style="width: 173px;"
+							onclick="document.getElementById('formTelefone').action = 'salvarTelefone?acao=voltar'">
+						</td>
 					</tr>
 				</table>
 			</li>
@@ -64,7 +70,8 @@
 						<td><c:out value="${telefone.numero}"></c:out></td>
 						<td><c:out value="${telefone.tipo}"></c:out></td>
 
-						<td><a href="salvarTelefone?acao=deleteFone&telefoneId=${telefone.id}"><img
+						<td><a
+							href="salvarTelefone?acao=deleteFone&telefoneId=${telefone.id}"><img
 								src="resources/img/excluir.png" width="20px" height="20px"
 								title="Excluir" alt="Excluir"></a></td>
 					</tr>
@@ -75,20 +82,16 @@
 
 	<script type="text/javascript">
 		function validarCampos() {
-			if (document.getElementById("id").value == '') {
-				alert('Informe o Usuário');
-				return false;
-			} else if (document.getElementById("nome").value == '') {
-				alert('Informe o Nome');
-				return false;
-			} else if (document.getElementById("numero").value == '') {
-				alert('Informe o número de telefone');
-				return false;
-			} else if (document.getElementById("tipo").value == '') {
-				alert('Informe o tipo de telefone');
-				return false;
+			if (document.getElementById('formUser').action != 'salvarTelefones?acao=voltar') {
+				if (document.getElementById("numero").value == '') {
+					alert('Informe o Número!');
+					return false;
+				}
+				if (document.getElementById("tipo").value == '') {
+					alert('Informe o Tipo!');
+					return false;
+				}
 			}
-
 			return true;
 		}
 	</script>

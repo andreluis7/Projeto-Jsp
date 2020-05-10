@@ -33,63 +33,71 @@
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"
-							value="${user.login}" placeholder="Informe o login"></td>
+							value="${user.login}" placeholder="Informe o login"
+							maxlength="20"></td>
 
 						<td>Senha:</td>
 						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}" placeholder="Informe a senha"></td>
+							value="${user.senha}" placeholder="Informe a senha"
+							maxlength="10"></td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" placeholder="Informe o nome"></td>
+							value="${user.nome}" placeholder="Informe o nome"
+							maxlength="50"></td>
 
 						<td>Telefone:</td>
 						<td><input type="text" id="telefone" name="telefone"
-							value="${user.telefone}" placeholder="Informe o telefone"></td>
+							value="${user.telefone}" placeholder="Informe o telefone"
+							maxlength="14"></td>
 					</tr>
 					<tr>
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}" placeholder="Informe o cep"></td>
+							value="${user.cep}" placeholder="Informe o cep"
+							maxlength="9"></td>
 
 						<td>Ibge:</td>
 						<td><input type="text" id="ibge" name="ibge"
-							value="${user.ibge}"></td>
+							value="${user.ibge}" maxlength="10"></td>
 					</tr>
 					<tr>
 						<td>Rua:</td>
 						<td><input type="text" id="rua" name="rua"
-							value="${user.rua}"></td>
+							value="${user.rua}" maxlength="100"></td>
 
 						<td>Bairro:</td>
 						<td><input type="text" id="bairro" name="bairro"
-							value="${user.bairro}"></td>
+							value="${user.bairro}" maxlength="50"></td>
 					</tr>
 					<tr>
 						<td>Cidade:</td>
 						<td><input type="text" id="cidade" name="cidade"
-							value="${user.cidade}"></td>
+							value="${user.cidade}" maxlength="50"></td>
 
 						<td>Estado:</td>
 						<td><input type="text" id="estado" name="estado"
-							value="${user.estado}"></td>
+							value="${user.estado}" maxlength="2"></td>
 					</tr>
 
 					<tr>
 						<td>Foto</td>
-						<td><input type="file" name="foto">
-						<input type="text" style="display: none;" name="fotoTemp" readonly="readonly" value="${user.fotoBase64}">
-						<input type="text" style="display: none;" name="contentTypeTemp" readonly="readonly" value="${user.contentType}">
-						</td>
+						<td><input type="file" name="foto"> <input
+							type="text" style="display: none;" name="fotoTemp"
+							readonly="readonly" value="${user.fotoBase64}"> <input
+							type="text" style="display: none;" name="contentTypeTemp"
+							readonly="readonly" value="${user.contentType}"></td>
 					</tr>
 
 					<tr>
 						<td>Currículo</td>
-						<td><input type="file" name="curriculo">
-						<input type="text" style="display: none;" name="curriculoTemp" readonly="readonly" value="${user.curriculoBase64}">
-						<input type="text" style="display: none;" name="curriculoContentTypeTemp" readonly="readonly" value="${user.contentTypeCurriculo}">
-						</td>
+						<td><input type="file" name="curriculo"> <input
+							type="text" style="display: none;" name="curriculoTemp"
+							readonly="readonly" value="${user.curriculoBase64}"> <input
+							type="text" style="display: none;"
+							name="curriculoContentTypeTemp" readonly="readonly"
+							value="${user.contentTypeCurriculo}"></td>
 					</tr>
 
 					<tr>
@@ -109,7 +117,6 @@
 			<tbody>
 				<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Login</th>
 					<th scope="col">Foto</th>
 					<th scope="col">Currículo</th>
 					<th scope="col">Nome</th>
@@ -120,24 +127,35 @@
 
 				<c:forEach items="${usuarios}" var="user">
 					<tr>
-						<td><c:out value="${user.id}"></c:out></td>
-						<td><c:out value="${user.login}"></c:out></td>
-						<td><a href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
-								src='<c:out value="${user.tempFotoUser}"/>' alt="Imagem User"
-								title="Imagem User" width="32px" height="32px" /> </a></td>
-						<td><a href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}">
-						Currículo</a></td>
-						<td><c:out value="${user.nome}"></c:out></td>
+						<td><c:out value="${user.id}" /></td>
 
+						<c:if test="${user.fotoBase64.isEmpty() == false}">
+							<td><a
+								href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
+									src='<c:out value="${user.tempFotoUser}"/>' alt="Imagem User"
+									title="Imagem User" width="32px" height="32px" /> </a></td>
+						</c:if>
+						<c:if test="${user.fotoBase64.isEmpty() == true}">
+							<td><img alt="Imagem User" src="resources/img/user.png"
+								width="32px" height="32px" onclick="alert('Não possui imagem')">
+							</td>
+						</c:if>
+
+						<td><a
+							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
+								alt="Curriculo" src="resources/img/imagemPdf.png" width="32px"
+								height="32px"> </a></td>
+
+						<td><c:out value="${user.nome}" /></td>
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
-								src="resources/img/telefone.png" width="20px" height="20px"
-								title="Telefones" alt="Telefones"></a></td>
+								src="resources/img/telefone.png" alt="Telefones"
+								title="Telefones" width="32px" height="32px" /></a></td>
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
-								src="resources/img/editar.png" width="20px" height="20px"
-								title="Editar" alt="Editar"></a></td>
+								src="resources/img/editar.png" alt="Editar" title="Editar"
+								width="32px" height="32px" /></a></td>
 						<td><a href="salvarUsuario?acao=delete&user=${user.id}"><img
-								src="resources/img/excluir.png" width="20px" height="20px"
-								title="Excluir" alt="Excluir"></a></td>
+								src="resources/img/excluir.png" alt="Excluir" title="Excluir"
+								width="32px" height="32px" /></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
