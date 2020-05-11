@@ -6,14 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="resources/css/cadastro.css" rel="stylesheet">
+<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery.maskMoney.min.js"
+	type="text/javascript"></script>
 <title>Cadastro de Produtos</title>
 </head>
 <body>
-<a href="acessoliberado.jsp">Início</a>
-<a href="index.jsp">Sair</a>
+	<a href="acessoliberado.jsp">Início</a>
+	<a href="index.jsp">Sair</a>
 	<h2 class="center">Cadastro de Produtos</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
-	<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos() ? true:false">
+	<form action="salvarProduto" method="post" id="formProduto"
+		onsubmit="return validarCampos() ? true:false">
 		<ul class="form-style-1">
 			<li>
 				<table>
@@ -24,18 +28,20 @@
 					</tr>
 					<tr>
 						<td>Nome:</td>
-						<td><input type="text" id="nome" name="nome"
-							value="${produto.nome}" placeholder = "Informe o nome do produto"></td>
+						<td><input type="text" id="nome" name="nome" maxlength="100"
+							value="${produto.nome}" placeholder="Informe o nome do produto"></td>
 					</tr>
 					<tr>
 						<td>Quantidade:</td>
-						<td><input type="text" id="quantidade" name="quantidade"
-							value="${produto.quantidade}" placeholder = "Informe a quantidade" ></td>
+						<td><input type="number" id="quantidade" name="quantidade"
+							maxlength="5" value="${produto.quantidade}"
+							placeholder="Informe a quantidade"></td>
 					</tr>
 					<tr>
 						<td>Valor:</td>
-						<td><input type="text" id="valor" name="valor"
-							value="${produto.valor}" placeholder = "Informe o valor do produto" ></td>
+						<td><input type="text" id="valor" name="valor" maxlength="12"
+							value="${produto.valor}" placeholder="Informe o valor do produto"
+							data-prefix="R$ " data-thousands="." data-decimal=","></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -96,9 +102,15 @@
 			}
 
 			return true;
-			
+
 		}
 	</script>
 
 </body>
+
+<script>
+	$(function() {
+		$('#valor').maskMoney();
+	})
+</script>
 </html>
