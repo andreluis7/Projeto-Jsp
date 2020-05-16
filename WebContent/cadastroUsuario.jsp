@@ -15,8 +15,10 @@
 <title>Cadastro de Usuário</title>
 </head>
 <body>
-	<a href="acessoliberado.jsp">Início</a>
-	<a href="index.jsp">Sair</a>
+	<a href="acessoliberado.jsp"><img alt="Inicio" title="Inicio"
+		src="resources/img/home.png" width="30" height="30"></a>
+	<a href="index.jsp"><img alt="Sair" title="Sair"
+		src="resources/img/exit.png" width="30" height="30"></a>
 	<h2 class="center">Cadastro de Usuario</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
 	<form action="salvarUsuario" method="post" id="formUser"
@@ -44,8 +46,7 @@
 					<tr>
 						<td>Nome:</td>
 						<td><input type="text" id="nome" name="nome"
-							value="${user.nome}" placeholder="Informe o nome"
-							maxlength="50"></td>
+							value="${user.nome}" placeholder="Informe o nome" maxlength="50"></td>
 
 						<td>Telefone:</td>
 						<td><input type="text" id="telefone" name="telefone"
@@ -55,8 +56,7 @@
 					<tr>
 						<td>Cep:</td>
 						<td><input type="text" id="cep" name="cep"
-							value="${user.cep}" placeholder="Informe o cep"
-							maxlength="9"></td>
+							value="${user.cep}" placeholder="Informe o cep" maxlength="9"></td>
 
 						<td>Ibge:</td>
 						<td><input type="text" id="ibge" name="ibge"
@@ -129,23 +129,30 @@
 					<tr>
 						<td><c:out value="${user.id}" /></td>
 
-						<c:if test="${user.fotoBase64Miniatura.isEmpty() == false}">
+						<c:if test="${user.fotoBase64Miniatura != null}">
 							<td><a
 								href="salvarUsuario?acao=download&tipo=imagem&user=${user.id}"><img
-									src='<c:out value="${user.fotoBase64Miniatura}"/>' alt="Imagem User"
-									title="Imagem User" width="32px" height="32px" /> </a></td>
+									src='<c:out value="${user.fotoBase64Miniatura}"/>'
+									alt="Imagem User" title="Imagem User" width="32px"
+									height="32px" /> </a></td>
 						</c:if>
-						<c:if test="${user.fotoBase64Miniatura.isEmpty() == true}">
-							<td><img alt="Imagem User" src="resources/img/user.png"
+						<c:if test="${user.fotoBase64Miniatura == null}">
+							<td><img alt="Imagem User" src="resources/img/userEmpty.png"
 								width="32px" height="32px" onclick="alert('Não possui imagem')">
 							</td>
 						</c:if>
-
-						<td><a
-							href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
-								alt="Curriculo" src="resources/img/imagemPdf.png" width="32px"
-								height="32px"> </a></td>
-
+						<c:if test="${user.curriculoBase64.isEmpty() == false}">
+							<td><a
+								href="salvarUsuario?acao=download&tipo=curriculo&user=${user.id}"><img
+									alt="Curriculo" src="resources/img/imagemPdf.png" width="32px"
+									height="32px"> </a></td>
+						</c:if>
+						<c:if test="${user.curriculoBase64.isEmpty() == true}">
+							<td><img alt="Curriculo" src="resources/img/pdfEmpty.png"
+								width="32px" height="32px" onclick="alert('Não possui currículo')">
+							</td>
+						</c:if>
+						
 						<td><c:out value="${user.nome}" /></td>
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
 								src="resources/img/telefone.png" alt="Telefones"

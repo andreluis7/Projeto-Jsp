@@ -14,7 +14,11 @@
 <link href="resources/css/estilo.css" rel="stylesheet" />
 </head>
 <body>
+		<center><h3>Projeto Prático</h3></center><br/>
+		<center><h1>JSP + Servlet + JDBC</h1></center><br/>
+		<center><span><b>Usuario:</b> admin <br/><b> Senha:</b> admin <br/></span></center>
 	<div class="login-page">
+		
 		<div class="form">
 			<form action="LoginServlet" method="post">
 				Login: <input type="text" id="login" name="login" placeholder = "Informe o login"> <br />
@@ -23,6 +27,7 @@
 				<button type="submit" value="Logar">Logar</button>
 			</form>
 		</div>
+		<center><h3><a href="https://www.linkedin.com/in/andreluis7/" style="text-decoration: none">Desenvolvido por André</a></h3></center><br/>
 	</div>
 </body>
 </html>

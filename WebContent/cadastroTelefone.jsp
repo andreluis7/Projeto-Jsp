@@ -10,8 +10,8 @@
 <title>Cadastro de Telefone</title>
 </head>
 <body>
-	<a href="acessoliberado.jsp">Início</a>
-	<a href="index.jsp">Sair</a>
+	<a href="acessoliberado.jsp"><img alt="Inicio" title="Inicio" src="resources/img/home.png" width="30" height="30"></a>
+	<a href="index.jsp"><img alt="Sair" title="Sair" src="resources/img/exit.png" width="30" height="30"></a>
 	<h2 class="center">Cadastro de Telefone</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
 	<form action="salvarTelefone" method="post" id="formTelefone"
