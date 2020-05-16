@@ -154,33 +154,39 @@ public class Usuario extends HttpServlet {
 				if (ServletFileUpload.isMultipartContent(request)) {
 					Part imagemFoto = request.getPart("foto");
 
-					byte[] bytesImagem = converteStremParabyte(imagemFoto.getInputStream());
-					
 					if (imagemFoto != null && imagemFoto.getInputStream().available() > 0) {
+
 						String fotoBase64 = new Base64()
-								.encodeBase64String(bytesImagem);
+								.encodeBase64String(converteStremParabyte(imagemFoto.getInputStream()));
+
 						beanCursoJsp.setFotoBase64(fotoBase64);
 						beanCursoJsp.setContentType(imagemFoto.getContentType());
-						/*Inicio miniatura da imagem*/
+						/* Inicio miniatura da imagem */
 
-						/*Transforma em um BufferedImage*/
-						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytesImagem));
-						/*Pega o tipo da imagem*/
-						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB: bufferedImage.getType();
-						/*Cria imagem em miniatura*/
-						BufferedImage resizedImage = new BufferedImage(100,100,type);
+						/* Transforma em um BufferedImage */
+						byte[] imageByteDecode = new Base64().decodeBase64(fotoBase64);
+						BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageByteDecode));
+						/* Pega o tipo da imagem */
+
+						int type = bufferedImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+						/* Cria imagem em miniatura */
+
+						BufferedImage resizedImage = new BufferedImage(100, 100, type);
 						Graphics2D g = resizedImage.createGraphics();
-						g.drawImage(resizedImage, 0, 0, 100, 100, null);
-						/*Escrever imagem novamente*/
+						g.drawImage(bufferedImage, 0, 0, 100, 100, null);
+						g.dispose();
+						/* Escrever imagem novamente */
+
 						ByteArrayOutputStream baos = new ByteArrayOutputStream();
 						ImageIO.write(resizedImage, "png", baos);
-						
-						String miniaturaBase64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(baos.toByteArray());
-						
+
+						String miniaturaBase64 = "data:image/png;base64,"
+								+ DatatypeConverter.printBase64Binary(baos.toByteArray());
+
 						beanCursoJsp.setFotoBase64Miniatura(miniaturaBase64);
-						/*Fim miniatura da imagem*/
-						
-					}else {
+						/* Fim miniatura da imagem */
+
+					} else {
 						beanCursoJsp.setFotoBase64(request.getParameter("fotoTemp"));
 						beanCursoJsp.setContentType(request.getParameter("contentTypeTemp"));
 					}
@@ -194,7 +200,7 @@ public class Usuario extends HttpServlet {
 
 						beanCursoJsp.setCurriculoBase64(curriculoBase64);
 						beanCursoJsp.setContentTypeCurriculo(curriculoPdf.getContentType());
-					}else {
+					} else {
 						beanCursoJsp.setCurriculoBase64(request.getParameter("curriculoTemp"));
 						beanCursoJsp.setContentTypeCurriculo(request.getParameter("curriculoContentTypeTemp"));
 					}
