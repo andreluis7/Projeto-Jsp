@@ -27,7 +27,8 @@ public class Produto extends HttpServlet {
 		try {
 			String acao = request.getParameter("acao");
 			String produto = request.getParameter("produto");
-
+			
+			if (acao != null) {
 			if (acao.equalsIgnoreCase("delete")) {
 				daoProduto.delete(produto);
 
@@ -43,6 +44,11 @@ public class Produto extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			} else if (acao.equalsIgnoreCase("listarProdutos")) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
+				request.setAttribute("produtos", daoProduto.listarProdutos());
+				dispatcher.forward(request, response);
+			}
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarProdutos());
 				dispatcher.forward(request, response);

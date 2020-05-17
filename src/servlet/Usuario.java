@@ -47,58 +47,64 @@ public class Usuario extends HttpServlet {
 			String acao = request.getParameter("acao");
 			String user = request.getParameter("user");
 
-			if (acao.equalsIgnoreCase("delete")) {
-				daoUsuario.delete(user);
+			if (acao != null) {
+				if (acao.equalsIgnoreCase("delete")) {
+					daoUsuario.delete(user);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
-				dispatcher.forward(request, response);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+					request.setAttribute("usuarios", daoUsuario.listarUsuarios());
+					dispatcher.forward(request, response);
 
-			} else if (acao.equalsIgnoreCase("editar")) {
-				BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
+				} else if (acao.equalsIgnoreCase("editar")) {
+					BeanCursoJsp beanCursoJsp = daoUsuario.consultar(user);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("user", beanCursoJsp);
-				dispatcher.forward(request, response);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+					request.setAttribute("user", beanCursoJsp);
+					dispatcher.forward(request, response);
 
-			} else if (acao.equalsIgnoreCase("listartodos")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
-				dispatcher.forward(request, response);
-			} else if (acao.equalsIgnoreCase("download")) {
-				BeanCursoJsp usuario = daoUsuario.consultar(user);
-				if (usuario != null) {
-					String contentType = "";
-					byte[] fileBytes = null;
-					String tipo = request.getParameter("tipo");
+				} else if (acao.equalsIgnoreCase("listartodos")) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+					request.setAttribute("usuarios", daoUsuario.listarUsuarios());
+					dispatcher.forward(request, response);
+				} else if (acao.equalsIgnoreCase("download")) {
+					BeanCursoJsp usuario = daoUsuario.consultar(user);
+					if (usuario != null) {
+						String contentType = "";
+						byte[] fileBytes = null;
+						String tipo = request.getParameter("tipo");
 
-					if (tipo.equalsIgnoreCase("imagem")) {
-						contentType = usuario.getContentType();
-						fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
-					} else if (tipo.equalsIgnoreCase("curriculo")) {
-						contentType = usuario.getContentTypeCurriculo();
-						fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
+						if (tipo.equalsIgnoreCase("imagem")) {
+							contentType = usuario.getContentType();
+							fileBytes = new Base64().decodeBase64(usuario.getFotoBase64());
+						} else if (tipo.equalsIgnoreCase("curriculo")) {
+							contentType = usuario.getContentTypeCurriculo();
+							fileBytes = new Base64().decodeBase64(usuario.getCurriculoBase64());
+						}
+
+						response.setHeader("Content-Disposition",
+								"attachment;filename=arquivo." + contentType.split("\\/")[1]);
+
+						/* Coloca os bytes em um objeto de entrada para processar */
+						InputStream is = new ByteArrayInputStream(fileBytes);
+
+						/* inicio da resposta para o navegador */
+						int read = 0;
+						byte[] bytes = new byte[1024];
+						OutputStream os = response.getOutputStream();
+
+						while ((read = is.read(bytes)) != -1) {
+							os.write(bytes, 0, read);
+						}
+
+						os.flush();
+						os.close();
+
 					}
-
-					response.setHeader("Content-Disposition",
-							"attachment;filename=arquivo." + contentType.split("\\/")[1]);
-
-					/* Coloca os bytes em um objeto de entrada para processar */
-					InputStream is = new ByteArrayInputStream(fileBytes);
-
-					/* inicio da resposta para o navegador */
-					int read = 0;
-					byte[] bytes = new byte[1024];
-					OutputStream os = response.getOutputStream();
-
-					while ((read = is.read(bytes)) != -1) {
-						os.write(bytes, 0, read);
-					}
-
-					os.flush();
-					os.close();
-
 				}
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("usuarios", daoUsuario.listarUsuarios());
+				dispatcher.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
