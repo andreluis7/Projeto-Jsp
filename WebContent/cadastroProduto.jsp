@@ -12,8 +12,10 @@
 <title>Cadastro de Produtos</title>
 </head>
 <body>
-	<a href="acessoliberado.jsp"><img alt="Inicio" title="Inicio" src="resources/img/home.png" width="30" height="30"></a>
-	<a href="index.jsp"><img alt="Sair" title="Sair" src="resources/img/exit.png" width="30" height="30"></a>
+	<a href="acessoliberado.jsp"><img alt="Inicio" title="Inicio"
+		src="resources/img/home.png" width="30" height="30"></a>
+	<a href="index.jsp"><img alt="Sair" title="Sair"
+		src="resources/img/exit.png" width="30" height="30"></a>
 	<h2 class="center">Cadastro de Produtos</h2>
 	<h3 class="center" style="color: orange">${msg}</h3>
 	<form action="salvarProduto" method="post" id="formProduto"
@@ -79,7 +81,8 @@
 								src="resources/img/editar.png" width="20px" height="20px"
 								title="Editar" alt="Editar"></a></td>
 						<td><a
-							href="salvarProduto?acao=delete&produto=${produto.codigo}"><img
+							href="salvarProduto?acao=delete&produto=${produto.codigo}"
+							onclick="return confirm('Deseja confirmar a exclusão?');"><img
 								src="resources/img/excluir.png" width="20px" height="20px"
 								title="Excluir" alt="Excluir"></a></td>
 					</tr>

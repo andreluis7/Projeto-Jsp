@@ -31,6 +31,8 @@
 						<td>Codigo:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"
 							value="${user.id}"></td>
+						<td>Ativo:</td>
+						<td><input type="checkbox" id="ativo" name="ativo"></td>
 					</tr>
 					<tr>
 						<td>Login:</td>
@@ -80,7 +82,6 @@
 						<td><input type="text" id="estado" name="estado"
 							value="${user.estado}" maxlength="2"></td>
 					</tr>
-
 					<tr>
 						<td>Foto</td>
 						<td><input type="file" name="foto"> <input
@@ -149,10 +150,10 @@
 						</c:if>
 						<c:if test="${user.curriculoBase64.isEmpty() == true}">
 							<td><img alt="Curriculo" src="resources/img/pdfEmpty.png"
-								width="32px" height="32px" onclick="alert('Não possui currículo')">
-							</td>
+								width="32px" height="32px"
+								onclick="alert('Não possui currículo')"></td>
 						</c:if>
-						
+
 						<td><c:out value="${user.nome}" /></td>
 						<td><a href="salvarTelefone?acao=addFone&user=${user.id}"><img
 								src="resources/img/telefone.png" alt="Telefones"
@@ -160,7 +161,8 @@
 						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img
 								src="resources/img/editar.png" alt="Editar" title="Editar"
 								width="32px" height="32px" /></a></td>
-						<td><a href="salvarUsuario?acao=delete&user=${user.id}"><img
+						<td><a href="salvarUsuario?acao=delete&user=${user.id}"
+							onclick="return confirm('Deseja confirmar a exclusão?');"><img
 								src="resources/img/excluir.png" alt="Excluir" title="Excluir"
 								width="32px" height="32px" /></a></td>
 					</tr>

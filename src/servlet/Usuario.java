@@ -7,7 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -20,15 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.buf.UDecoder;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import beans.BeanCursoJsp;
 import dao.DaoUsuario;
-import sun.font.FontResolver;
 
 @WebServlet("/salvarUsuario")
 @MultipartConfig
@@ -154,6 +149,12 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setEstado(estado);
 			beanCursoJsp.setIbge(ibge);
 
+			if(request.getParameter("ativo") != null && request.getParameter("ativo").equalsIgnoreCase("on")) {
+				beanCursoJsp.setAtivo(true);
+			}else {
+				beanCursoJsp.setAtivo(false);
+			}
+			
 			// Inicio File Upload de imagens e pdf
 			try {
 

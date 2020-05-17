@@ -20,6 +20,7 @@ public class BeanCursoJsp {
 	private String contentType;
 	private String contentTypeCurriculo;
 	private String tempFotoUser;
+	private boolean ativo;
 
 	public String getTempFotoUser() {
 
@@ -154,5 +155,13 @@ public class BeanCursoJsp {
 
 	public void setFotoBase64Miniatura(String fotoBase64Miniatura) {
 		this.fotoBase64Miniatura = fotoBase64Miniatura;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 }
