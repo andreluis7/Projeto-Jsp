@@ -133,7 +133,8 @@ public class Usuario extends HttpServlet {
 			String cidade = request.getParameter("cidade");
 			String estado = request.getParameter("estado");
 			String ibge = request.getParameter("ibge");
-
+			String sexo = request.getParameter("sexo");
+			
 			BeanCursoJsp beanCursoJsp = new BeanCursoJsp();
 
 			beanCursoJsp.setId(!id.isEmpty() ? Long.parseLong(id) : null);
@@ -148,7 +149,8 @@ public class Usuario extends HttpServlet {
 			beanCursoJsp.setCidade(cidade);
 			beanCursoJsp.setEstado(estado);
 			beanCursoJsp.setIbge(ibge);
-
+			beanCursoJsp.setSexo(sexo);
+			
 			if(request.getParameter("ativo") != null && request.getParameter("ativo").equalsIgnoreCase("on")) {
 				beanCursoJsp.setAtivo(true);
 			}else {

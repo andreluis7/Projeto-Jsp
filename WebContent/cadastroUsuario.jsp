@@ -34,18 +34,14 @@
 							value="${user.id}"></td>
 						<td>Ativo:</td>
 						<td><input type="checkbox" id="ativo" name="ativo"
-						<%
-						if(request.getAttribute("user") != null){
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if(user.isAtivo()){
-								out.print(" ");
-								out.print("checked=\"checked\"");
-								out.print(" ");
-							}
-						}
-						%>
-						
-						></td>
+							<%if (request.getAttribute("user") != null) {
+				BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+				if (user.isAtivo()) {
+					out.print(" ");
+					out.print("checked=\"checked\"");
+					out.print(" ");
+				}
+			}%>></td>
 					</tr>
 					<tr>
 						<td>Login:</td>
@@ -94,6 +90,39 @@
 						<td>Estado:</td>
 						<td><input type="text" id="estado" name="estado"
 							value="${user.estado}" maxlength="2"></td>
+					</tr>
+					<tr>
+						<td>Sexo:</td>
+						<td><input type="radio" name="sexo"
+						
+						<%
+						if (request.getAttribute("user") != null) {
+							
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getSexo().equalsIgnoreCase("masculino")) {
+							out.print(" ");
+							out.print("checked=\"checked\"");
+							out.print(" ");
+							}
+						}
+						%>
+						
+						value="masculino">Masculino</input> 
+							
+							<input type="radio" name="sexo" 
+						<%
+						if (request.getAttribute("user") != null) {
+							
+							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+							if (user.getSexo().equalsIgnoreCase("feminino")) {
+							out.print(" ");
+							out.print("checked=\"checked\"");
+							out.print(" ");
+							}
+						}
+						%>
+						
+							value="feminino">Feminino</input></td>
 					</tr>
 					<tr>
 						<td>Foto</td>

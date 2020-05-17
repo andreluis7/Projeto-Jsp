@@ -21,6 +21,7 @@ public class BeanCursoJsp {
 	private String contentTypeCurriculo;
 	private String tempFotoUser;
 	private boolean ativo;
+	private String sexo;
 
 	public String getTempFotoUser() {
 
@@ -163,5 +164,13 @@ public class BeanCursoJsp {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 }
