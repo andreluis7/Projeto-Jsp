@@ -91,39 +91,108 @@
 						<td><input type="text" id="estado" name="estado"
 							value="${user.estado}" maxlength="2"></td>
 					</tr>
-					<tr>
-						<td>Sexo:</td>
-						<td><input type="radio" name="sexo"
+					
+						<tr>
+					<td>Perfil: </td>
+					<td>
+						<select id="perfil" name="perfil" style="width: 185px; height: 30px;">
+						<option value="nao_informado">[--SELECIONE--]</option>
+						<option value="administrador" 
 						
 						<%
 						if (request.getAttribute("user") != null) {
-							
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getSexo().equalsIgnoreCase("masculino")) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getPerfil().equalsIgnoreCase("administrador")) {
 							out.print(" ");
-							out.print("checked=\"checked\"");
+							out.print("selected=\"selected\"");
 							out.print(" ");
 							}
 						}
 						%>
 						
-						value="masculino">Masculino</input> 
-							
-							<input type="radio" name="sexo" 
+						>Administrador</option>
+						<option value="secretario"
+						
 						<%
 						if (request.getAttribute("user") != null) {
-							
-							BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
-							if (user.getSexo().equalsIgnoreCase("feminino")) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getPerfil().equalsIgnoreCase("secretario")) {
 							out.print(" ");
-							out.print("checked=\"checked\"");
+							out.print("selected=\"selected\"");
 							out.print(" ");
 							}
 						}
 						%>
 						
-							value="feminino">Feminino</input></td>
+						>Secretario(a)</option>
+						<option value="gerente"
+						
+						<%
+						if (request.getAttribute("user") != null) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getPerfil().equalsIgnoreCase("gerente")) {
+							out.print(" ");
+							out.print("selected=\"selected\"");
+							out.print(" ");
+							}
+						}
+						%>
+						
+						>Gerente</option>
+						<option value="funcionario"
+						
+						<%
+						if (request.getAttribute("user") != null) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getPerfil().equalsIgnoreCase("funcionario")) {
+							out.print(" ");
+							out.print("selected=\"selected\"");
+							out.print(" ");
+							}
+						}
+						%>
+						
+						>Funcionário</option>
+						</select>
+					</td>
+
+					<td>Sexo:</td>
+					<td><input type="radio" name="sexo"
+						
+					<%
+					if (request.getAttribute("user") != null) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getSexo().equalsIgnoreCase("masculino")) {
+						out.print(" ");
+						out.print("checked=\"checked\"");
+						out.print(" ");
+						}
+					}
+					%>
+						
+					value="masculino">Masculino</input> 
+							
+					<input type="radio" name="sexo" 
+					<%
+					if (request.getAttribute("user") != null) {
+						
+						BeanCursoJsp user = (BeanCursoJsp) request.getAttribute("user");
+						if (user.getSexo().equalsIgnoreCase("feminino")) {
+							out.print(" ");
+							out.print("checked=\"checked\"");
+							out.print(" ");
+							}
+					}
+					%>
+						
+					value="feminino">Feminino</input></td>
 					</tr>
+					
 					<tr>
 						<td>Foto</td>
 						<td><input type="file" name="foto"> <input
@@ -141,7 +210,7 @@
 							type="text" style="display: none;"
 							name="curriculoContentTypeTemp" readonly="readonly"
 							value="${user.contentTypeCurriculo}"></td>
-					</tr>
+					</tr>					
 
 					<tr>
 						<td></td>
