@@ -81,6 +81,7 @@ public class DaoUsuario {
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
 			usuarios.add(beanCursoJsp);
 		}
 		return usuarios;
@@ -126,6 +127,7 @@ public class DaoUsuario {
 			beanCursoJsp.setContentType(resultSet.getString("contenttype"));
 			beanCursoJsp.setCurriculoBase64(resultSet.getString("curriculobase64"));
 			beanCursoJsp.setContentTypeCurriculo(resultSet.getString("contenttypecurriculo"));
+			beanCursoJsp.setAtivo(resultSet.getBoolean("ativo"));
 
 			return beanCursoJsp;
 		}
