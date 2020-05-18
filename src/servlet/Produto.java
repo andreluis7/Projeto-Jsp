@@ -70,6 +70,8 @@ public class Produto extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String valor = request.getParameter("valor");
+			String categoria = request.getParameter("categoria_id");
+			
 			boolean podeInserir = true;
 			String msg = null;
 
@@ -85,6 +87,7 @@ public class Produto extends HttpServlet {
 			produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
 			produtoBean.setNome(nome);
 			produtoBean.setValor(valor);
+			produtoBean.setCategoria_id(Long.parseLong(categoria));
 
 			try {
 				if (nome == null || nome.isEmpty()) {
