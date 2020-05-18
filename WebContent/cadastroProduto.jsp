@@ -46,6 +46,18 @@
 							data-prefix="R$ " data-thousands="." data-decimal=","></td>
 					</tr>
 					<tr>
+						<td>Categorias: </td>
+						<td>
+							<select id="categorias" name="categoria_id" style="width: 185px; height: 30px;">
+								<c:forEach items="${categorias}" var="cat">
+									<option value="${cat.id}" id="${cat.id}">
+									${cat.nome}
+									</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"
 							style="margin-right: 5px"><input type="submit"

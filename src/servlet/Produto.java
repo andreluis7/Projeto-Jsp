@@ -27,32 +27,24 @@ public class Produto extends HttpServlet {
 		try {
 			String acao = request.getParameter("acao");
 			String produto = request.getParameter("produto");
-			
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
 			if (acao != null) {
-			if (acao.equalsIgnoreCase("delete")) {
-				daoProduto.delete(produto);
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
-				request.setAttribute("produtos", daoProduto.listarProdutos());
-				dispatcher.forward(request, response);
-
-			} else if (acao.equalsIgnoreCase("editar")) {
-				ProdutoBean produtoBean = daoProduto.consultar(produto);
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
-				request.setAttribute("produto", produtoBean);
-				dispatcher.forward(request, response);
-
-			} else if (acao.equalsIgnoreCase("listarProdutos")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
-				request.setAttribute("produtos", daoProduto.listarProdutos());
-				dispatcher.forward(request, response);
-			}
+				if (acao.equalsIgnoreCase("delete")) {
+					daoProduto.delete(produto);
+					request.setAttribute("produtos", daoProduto.listarProdutos());
+				} else if (acao.equalsIgnoreCase("editar")) {
+					ProdutoBean produtoBean = daoProduto.consultar(produto);
+					request.setAttribute("produto", produtoBean);
+				} else if (acao.equalsIgnoreCase("listarProdutos")) {
+					request.setAttribute("produtos", daoProduto.listarProdutos());
+				}
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarProdutos());
-				dispatcher.forward(request, response);
 			}
+			request.setAttribute("categorias", daoProduto.listarCategorias());
+			dispatcher.forward(request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,7 +79,7 @@ public class Produto extends HttpServlet {
 				msg = "\nQuantidade é obrigatório";
 				podeInserir = false;
 			} else {
-				produtoBean.setQuantidade(Integer.parseInt(quantidade));	
+				produtoBean.setQuantidade(Integer.parseInt(quantidade));
 			}
 
 			produtoBean.setCodigo(!codigo.isEmpty() ? Long.parseLong(codigo) : null);
@@ -129,6 +121,7 @@ public class Produto extends HttpServlet {
 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
 				request.setAttribute("produtos", daoProduto.listarProdutos());
+				request.setAttribute("categorias", daoProduto.listarCategorias());
 				dispatcher.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

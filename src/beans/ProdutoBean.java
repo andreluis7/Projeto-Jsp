@@ -6,6 +6,7 @@ public class ProdutoBean {
 	private String nome;
 	private Integer quantidade;
 	private String valor;
+	private Long categoria_id;
 
 	public Long getCodigo() {
 		return codigo;
@@ -39,10 +40,12 @@ public class ProdutoBean {
 		this.valor = valor;
 	}
 
-	@Override
-	public String toString() {
-		return "ProdutoBean [codigo=" + codigo + ", nome=" + nome + ", quantidade=" + quantidade + ", valor=" + valor
-				+ "]";
+	public Long getCategoria_id() {
+		return categoria_id;
 	}
-
+	
+	public void setCategoria_id(Long categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+	
 }
