@@ -50,9 +50,12 @@
 						<td>
 							<select id="categorias" name="categoria_id" style="width: 185px; height: 30px;">
 								<c:forEach items="${categorias}" var="cat">
-									<option value="${cat.id}" id="${cat.id}">
-									${cat.nome}
-									</option>
+									<option value="${cat.id}" id="${cat.id}" 
+											<c:if test="${cat.id == produto.categoria_id}">
+												<c:out value="selected=selected"/>
+											</c:if>>
+											${cat.nome}
+										</option>
 								</c:forEach>
 							</select>
 						</td>
